@@ -3,68 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>SALADA DE FRUTA</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --pink:#FF2D78;--cyan:#00F5FF;--green:#39FF14;
-  --yellow:#FFE600;--purple:#BF5FFF;
-  --bg:#040810;--glass:rgba(0,245,255,0.04);
-  --border:rgba(0,245,255,0.15);--text:#E0F4FF;
-  --dim:rgba(224,244,255,0.35);
-}
+:root{--pink:#FF2D78;--cyan:#00F5FF;--green:#39FF14;--yellow:#FFE600;--purple:#BF5FFF;--bg:#040810;--glass:rgba(0,245,255,0.04);--border:rgba(0,245,255,0.15);--text:#E0F4FF;--dim:rgba(224,244,255,0.35)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{font-size:16px;height:100%}
-body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100%;min-height:100dvh;overflow-x:hidden;-webkit-text-size-adjust:100%}
-
-body::before{content:'';position:fixed;inset:0;z-index:0;
-  background-image:linear-gradient(rgba(0,245,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.025) 1px,transparent 1px);
-  background-size:40px 40px;pointer-events:none}
-body::after{content:'';position:fixed;inset:0;z-index:1;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);
-  pointer-events:none}
-
-.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.08;pointer-events:none;z-index:0;animation:orbF 18s ease-in-out infinite alternate}
+html,body{height:100%}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(0,245,255,.025)1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.025)1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+body::after{content:'';position:fixed;inset:0;z-index:1;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07)2px,rgba(0,0,0,.07)4px);pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.08;pointer-events:none;z-index:0}
 .o1{width:400px;height:400px;background:var(--pink);top:-100px;left:-100px}
-.o2{width:350px;height:350px;background:var(--cyan);bottom:-100px;right:-100px;animation-delay:-6s}
-.o3{width:250px;height:250px;background:var(--purple);top:45%;left:50%;animation:orbF3 18s ease-in-out infinite alternate;animation-delay:-12s}
-@keyframes orbF{from{transform:translate(0,0)}to{transform:translate(20px,25px)}}
-@keyframes orbF3{from{transform:translate(-50%,-50%)scale(1)}to{transform:translate(calc(-50% + 20px),calc(-50% + 25px))scale(1.05)}}
-
-#app{position:relative;z-index:10;max-width:1040px;margin:0 auto;padding:1.5rem 1rem;min-height:100dvh}
-
-.screen{display:none}
-.screen.active{display:block;animation:fadeUp .35s cubic-bezier(.22,1,.36,1)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
+.o2{width:350px;height:350px;background:var(--cyan);bottom:-100px;right:-100px}
+.o3{width:250px;height:250px;background:var(--purple);top:40%;left:50%;transform:translate(-50%,-50%)}
+#app{position:relative;z-index:10;max-width:960px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.screen{display:none}.screen.active{display:block;animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .neon-title{font-family:'Orbitron',monospace;font-weight:900;text-align:center;letter-spacing:.06em;line-height:1;text-transform:uppercase}
 .np{color:var(--pink);text-shadow:0 0 7px var(--pink),0 0 20px var(--pink),0 0 50px var(--pink)}
 .nc{color:var(--cyan);text-shadow:0 0 7px var(--cyan),0 0 20px var(--cyan),0 0 50px var(--cyan)}
-.ng{color:var(--green);text-shadow:0 0 7px var(--green),0 0 20px var(--green),0 0 40px var(--green)}
+.ng{color:var(--green);text-shadow:0 0 7px var(--green),0 0 20px var(--green)}
 .ny{color:var(--yellow);text-shadow:0 0 7px var(--yellow),0 0 20px var(--yellow)}
-
-.panel{background:var(--glass);border:1px solid var(--border);border-radius:4px;padding:1.5rem;position:relative;overflow:hidden;margin-bottom:1rem;backdrop-filter:blur(8px)}
+.panel{background:var(--glass);border:1px solid var(--border);border-radius:4px;padding:1.5rem;position:relative;overflow:hidden;margin-bottom:1rem;backdrop-filter:blur(6px)}
 .panel::before,.panel::after{content:'';position:absolute;width:12px;height:12px;border-color:var(--cyan);border-style:solid}
 .panel::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
 .panel::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
 .panel-yellow{border-color:rgba(255,230,0,.2)}.panel-yellow::before,.panel-yellow::after{border-color:var(--yellow)}
 .ptag{position:absolute;top:-1px;left:16px;background:var(--cyan);color:var(--bg);font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:.15em;padding:.12rem .5rem;text-transform:uppercase}
 .ptag.yw{background:var(--yellow)}
-
-/* INPUTS — font-size mínimo 16px para não zoom no iOS */
+/* inputs — 16px evita zoom iOS */
 .field{margin-bottom:1rem}
 .field label{display:block;font-family:'Orbitron',monospace;font-size:.58rem;font-weight:700;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:.4rem;opacity:.7}
-.field input{width:100%;padding:.8rem .9rem;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.2);border-radius:2px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;transition:border-color .2s,background .2s;caret-color:var(--cyan);-webkit-appearance:none;appearance:none}
-.field input::placeholder{color:rgba(224,244,255,.15)}
+.field input{width:100%;padding:.8rem .9rem;background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.2);border-radius:2px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;caret-color:var(--cyan);-webkit-appearance:none;appearance:none}
 .field input:focus{border-color:var(--cyan);background:rgba(0,245,255,.07)}
 .big-code{font-family:'Orbitron',monospace!important;font-size:1.6rem!important;font-weight:900!important;text-align:center!important;letter-spacing:.5rem!important;text-transform:uppercase!important;padding:1rem!important;color:var(--yellow)!important;border-color:rgba(255,230,0,.3)!important;background:rgba(255,230,0,.03)!important;caret-color:var(--yellow)!important}
-
-/* BUTTONS */
-.btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:100%;padding:.85rem 1.2rem;border:none;border-radius:2px;font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;-webkit-appearance:none;appearance:none;touch-action:manipulation}
-.btn:active:not(:disabled){transform:scale(.96);opacity:.85}
+/* buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:.4rem;width:100%;padding:.85rem 1.2rem;border:none;border-radius:2px;font-family:'Orbitron',monospace;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:opacity .15s,transform .15s;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.btn:active:not(:disabled){transform:scale(.96);opacity:.8}
 .btn:disabled{opacity:.3;pointer-events:none}
 .btn-cyan{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);box-shadow:0 0 12px rgba(0,245,255,.15)}
 .btn-pink{background:transparent;color:var(--pink);border:1.5px solid var(--pink);box-shadow:0 0 12px rgba(255,45,120,.15)}
@@ -72,213 +48,145 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
 .btn-ghost{background:transparent;color:var(--dim);border:1px solid rgba(224,244,255,.1);font-size:.72rem}
 .btn-sm{padding:.45rem .9rem;font-size:.65rem;width:auto}
 .btn-icon{width:2.4rem;height:2.4rem;padding:0;border-radius:50%;font-size:1rem;flex-shrink:0;min-width:2.4rem}
-
-.divider{display:flex;align-items:center;gap:.75rem;margin:1rem 0;color:var(--dim);font-size:.65rem;font-weight:700;font-family:'Orbitron',monospace;letter-spacing:.2em;text-transform:uppercase}
+.divider{display:flex;align-items:center;gap:.75rem;margin:1rem 0;color:var(--dim);font-size:.65rem;font-family:'Orbitron',monospace;letter-spacing:.2em;text-transform:uppercase}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,255,.2),transparent)}
-
+/* code box */
 .code-box{text-align:center;padding:1.25rem .75rem .5rem}
 .code-box .cbl{font-family:'Orbitron',monospace;font-size:.55rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;margin-bottom:.5rem}
-.code-box .cbv{font-family:'Orbitron',monospace;font-size:2.8rem;font-weight:900;letter-spacing:.7rem;color:var(--yellow);text-shadow:0 0 10px var(--yellow),0 0 30px var(--yellow);line-height:1;animation:flicker 8s linear infinite}
-@keyframes flicker{0%,19%,21%,23%,100%{opacity:1}20%,22%{opacity:.82}}
-
+.code-box .cbv{font-family:'Orbitron',monospace;font-size:2.6rem;font-weight:900;letter-spacing:.6rem;color:var(--yellow);text-shadow:0 0 10px var(--yellow),0 0 30px var(--yellow);line-height:1}
+/* player list */
 .plist{display:flex;flex-direction:column;gap:.4rem}
-.prow{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.08);border-left:2px solid rgba(0,245,255,.3);border-radius:2px;animation:rowSlide .3s ease both}
+.prow{display:flex;align-items:center;gap:.75rem;padding:.65rem .9rem;background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.08);border-left:2px solid rgba(0,245,255,.3);border-radius:2px}
 .prow.me{background:rgba(57,255,20,.04);border-left-color:var(--green)}
 .prow.host{border-left-color:var(--yellow)}
-@keyframes rowSlide{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
-.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--cyan);box-shadow:0 0 5px var(--cyan);animation:dotP 2s ease-in-out infinite}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;background:var(--cyan);box-shadow:0 0 5px var(--cyan)}
 .pdot.me{background:var(--green);box-shadow:0 0 5px var(--green)}
 .pdot.host{background:var(--yellow);box-shadow:0 0 5px var(--yellow)}
-@keyframes dotP{0%,100%{opacity:1}50%{opacity:.35}}
 .pname{flex:1;font-weight:700;font-size:.95rem}
 .ptag2{font-family:'Orbitron',monospace;font-size:.55rem;color:var(--green);letter-spacing:.08em;margin-left:.3rem}
 .ptag2.ht{color:var(--yellow)}
 .ppts{font-family:'Orbitron',monospace;font-size:.8rem;font-weight:700;color:var(--cyan)}
-
 .rule-item{display:flex;align-items:center;gap:.6rem;padding:.45rem 0;font-size:.85rem;font-weight:600;color:var(--dim);border-bottom:1px solid rgba(0,245,255,.05)}
 .rule-item:last-child{border-bottom:none}
 .rbadge{font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;padding:.12rem .5rem;border-radius:2px;white-space:nowrap;flex-shrink:0}
 .rbg{color:var(--green);border:1px solid rgba(57,255,20,.4);background:rgba(57,255,20,.06)}
 .rby{color:var(--yellow);border:1px solid rgba(255,230,0,.4);background:rgba(255,230,0,.06)}
 .rbp{color:var(--pink);border:1px solid rgba(255,45,120,.4);background:rgba(255,45,120,.06)}
-
-/* LOBBY */
+/* lobby grid */
 .lobby-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem}
-
 /* HUD */
-.hud{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding:.5rem 0}
+.hud{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
 .hud-round{font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
 .hud-round span{color:var(--cyan)}
-.hud-timer{font-family:'Orbitron',monospace;font-size:3rem;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 12px var(--green),0 0 35px rgba(57,255,20,.4);transition:color .3s,text-shadow .3s;min-width:3.5rem;text-align:right}
-.hud-timer.warn{color:var(--yellow);text-shadow:0 0 12px var(--yellow),0 0 35px rgba(255,230,0,.4)}
-.hud-timer.danger{color:var(--pink);text-shadow:0 0 12px var(--pink),0 0 35px rgba(255,45,120,.5);animation:tPanic .6s steps(1) infinite}
-@keyframes tPanic{0%{opacity:1}50%{opacity:.55}}
-
-/* LETTER */
-.letter-stage{display:flex;justify-content:center;align-items:center;margin-bottom:1.25rem}
-.letter-ring{position:relative;width:100px;height:100px;display:flex;align-items:center;justify-content:center}
-.letter-ring::before{content:'';position:absolute;inset:0;border-radius:50%;border:2px solid transparent;background:conic-gradient(var(--pink),var(--cyan),var(--green),var(--yellow),var(--pink)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:ringR 4s linear infinite}
-@keyframes ringR{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.letter-char{font-family:'Orbitron',monospace;font-size:4.2rem;font-weight:900;color:white;text-shadow:0 0 10px var(--pink),0 0 28px var(--pink),0 0 70px rgba(255,45,120,.6);animation:lPop .4s cubic-bezier(.34,1.56,.64,1);display:block;line-height:1}
-@keyframes lPop{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
-
-/* STOP ALERT */
-.stop-alert{background:rgba(255,230,0,.05);border:1px solid rgba(255,230,0,.25);border-radius:2px;padding:.55rem 1rem;text-align:center;font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:.12em;color:var(--yellow);margin-bottom:1rem;text-transform:uppercase;animation:aGlow 1.5s ease-in-out infinite}
-@keyframes aGlow{0%,100%{opacity:.75}50%{opacity:1}}
-
-/* CATEGORIES — 2 col no mobile */
+.hud-timer{font-family:'Orbitron',monospace;font-size:3rem;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 12px var(--green);transition:color .3s;min-width:3rem;text-align:right}
+.hud-timer.warn{color:var(--yellow);text-shadow:0 0 12px var(--yellow)}
+.hud-timer.danger{color:var(--pink);text-shadow:0 0 12px var(--pink);animation:tPanic .6s steps(1) infinite}
+@keyframes tPanic{0%{opacity:1}50%{opacity:.5}}
+/* letter ring */
+.letter-stage{display:flex;justify-content:center;margin-bottom:1.25rem}
+.letter-ring{position:relative;width:90px;height:90px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid rgba(255,45,120,.4)}
+.letter-char{font-family:'Orbitron',monospace;font-size:3.8rem;font-weight:900;color:white;text-shadow:0 0 10px var(--pink),0 0 28px var(--pink);animation:lPop .4s ease;display:block;line-height:1}
+@keyframes lPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+/* stop alert */
+.stop-alert{background:rgba(255,230,0,.05);border:1px solid rgba(255,230,0,.25);border-radius:2px;padding:.55rem 1rem;text-align:center;font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:.1em;color:var(--yellow);margin-bottom:1rem;text-transform:uppercase}
+/* categories — 2 col */
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.cat-label{font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase;margin-bottom:.25rem;opacity:.6}
-/* font-size 16px obrigatório para não fazer zoom no iOS */
-.cat-input{width:100%;padding:.65rem .75rem;background:rgba(0,0,0,.4);border:1px solid rgba(0,245,255,.15);border-bottom:2px solid rgba(0,245,255,.3);border-radius:2px 2px 0 0;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;transition:border-color .2s;caret-color:var(--cyan);-webkit-appearance:none;appearance:none}
-.cat-input::placeholder{color:rgba(224,244,255,.1)}
+.cat-label{font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:.12em;color:var(--cyan);text-transform:uppercase;margin-bottom:.25rem;opacity:.6}
+.cat-input{width:100%;padding:.65rem .75rem;background:rgba(0,0,0,.4);border:1px solid rgba(0,245,255,.15);border-bottom:2px solid rgba(0,245,255,.3);border-radius:2px 2px 0 0;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;caret-color:var(--cyan);-webkit-appearance:none;appearance:none}
 .cat-input:focus{border-bottom-color:var(--cyan);background:rgba(0,245,255,.04)}
-.cat-input:disabled{opacity:.22;pointer-events:none}
-
-/* STOP BUTTON — maior área de toque */
+.cat-input:disabled{opacity:.2;pointer-events:none}
+/* stop button */
 .stop-stage{display:flex;justify-content:center;margin:1.5rem 0 .5rem}
-.stop-btn{width:110px;height:110px;border-radius:50%;border:3px solid var(--pink);background:radial-gradient(circle at 40% 35%,rgba(255,45,120,.18),rgba(255,45,120,.05) 70%);color:var(--pink);font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;line-height:1;box-shadow:0 0 20px rgba(255,45,120,.4),0 0 55px rgba(255,45,120,.18);transition:all .12s;animation:sGlow 2s ease-in-out infinite;position:relative;overflow:hidden;letter-spacing:.08em;text-transform:uppercase;touch-action:manipulation;-webkit-appearance:none}
-.stop-btn::before{content:'';position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(255,45,120,.3)}
-.stop-btn .si{font-size:1.7rem;line-height:1}
-.stop-btn:active:not(:disabled){transform:scale(.92)}
-.stop-btn:disabled{border-color:rgba(224,244,255,.1);color:rgba(224,244,255,.12);box-shadow:none;animation:none;background:transparent}
-@keyframes sGlow{0%,100%{box-shadow:0 0 20px rgba(255,45,120,.4),0 0 55px rgba(255,45,120,.18)}50%{box-shadow:0 0 32px rgba(255,45,120,.65),0 0 80px rgba(255,45,120,.3)}}
-
-/* GAME LAYOUT — tudo numa coluna no mobile */
-.game-layout{display:flex;flex-direction:column;gap:1rem}
-
-/* CHAT — botão flutuante + drawer fixo no mobile */
-/* Botão para abrir chat (só aparece no mobile) */
-.chat-fab{display:none;position:fixed;bottom:1.5rem;right:1.25rem;z-index:500;width:52px;height:52px;border-radius:50%;background:rgba(4,8,16,.95);border:2px solid var(--cyan);color:var(--cyan);font-size:1.4rem;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(0,245,255,.35),0 4px 20px rgba(0,0,0,.6);cursor:pointer;touch-action:manipulation;-webkit-appearance:none;transition:transform .15s}
-.chat-fab:active{transform:scale(.9)}
-.chat-fab .fab-badge{position:absolute;top:-4px;right:-4px;background:var(--pink);color:#fff;font-family:'Orbitron',monospace;font-size:.5rem;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:none;align-items:center;justify-content:center;padding:0 4px;box-shadow:0 0 8px var(--pink)}
-.chat-fab .fab-badge.show{display:flex}
-
-/* Drawer: ocupa tela toda acima do teclado no mobile */
-.chat-drawer{display:none;position:fixed;left:0;right:0;bottom:0;z-index:600;background:rgba(4,8,16,.98);border-top:2px solid rgba(0,245,255,.3);flex-direction:column;max-height:70vh;transition:transform .25s cubic-bezier(.22,1,.36,1)}
-.chat-drawer.open{display:flex}
-.chat-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;border-bottom:1px solid rgba(0,245,255,.1);flex-shrink:0}
-.chat-drawer-title{font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase}
-.chat-drawer-close{background:none;border:none;color:var(--dim);font-size:1.2rem;cursor:pointer;padding:.2rem .5rem;touch-action:manipulation;line-height:1}
-
-/* Tabs */
-.chat-tabs{display:flex;border-bottom:1px solid rgba(0,245,255,.1);flex-shrink:0}
-.chat-tab{flex:1;padding:.5rem .4rem;font-family:'Orbitron',monospace;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;background:transparent;border:none;color:var(--dim);transition:color .2s;touch-action:manipulation}
-.chat-tab.active{color:var(--cyan);border-bottom:2px solid var(--cyan);text-shadow:0 0 8px var(--cyan)}
-
-/* Messages */
-.chat-msgs{overflow-y:auto;padding:.6rem;display:flex;flex-direction:column;gap:.35rem;flex:1;min-height:0;scrollbar-width:thin;scrollbar-color:rgba(0,245,255,.2) transparent}
+.stop-btn{width:100px;height:100px;border-radius:50%;border:3px solid var(--pink);background:radial-gradient(circle at 40% 35%,rgba(255,45,120,.15),rgba(255,45,120,.04)70%);color:var(--pink);font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;line-height:1;box-shadow:0 0 20px rgba(255,45,120,.4);letter-spacing:.08em;text-transform:uppercase;touch-action:manipulation;-webkit-appearance:none;transition:transform .12s,opacity .12s}
+.stop-btn .si{font-size:1.6rem;line-height:1}
+.stop-btn:active:not(:disabled){transform:scale(.9)}
+.stop-btn:disabled{border-color:rgba(224,244,255,.1);color:rgba(224,244,255,.1);box-shadow:none;background:transparent}
+/* CHAT — painel normal que rola com a página */
+.chat-panel{background:var(--glass);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:1rem;backdrop-filter:blur(6px);position:relative}
+.chat-panel::before,.chat-panel::after{content:'';position:absolute;width:12px;height:12px;border-color:var(--cyan);border-style:solid}
+.chat-panel::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.chat-panel::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.chat-head{padding:.65rem .9rem;border-bottom:1px solid rgba(0,245,255,.08);font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase}
+.chat-msgs{overflow-y:auto;padding:.6rem;display:flex;flex-direction:column;gap:.3rem;height:180px;scrollbar-width:thin;scrollbar-color:rgba(0,245,255,.2)transparent}
 .chat-msgs::-webkit-scrollbar{width:3px}
 .chat-msgs::-webkit-scrollbar-thumb{background:rgba(0,245,255,.2);border-radius:2px}
-.chat-msg{padding:.35rem .55rem;border-radius:2px;font-size:.85rem;animation:msgIn .2s ease;line-height:1.4}
-@keyframes msgIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg{padding:.3rem .5rem;border-radius:2px;font-size:.82rem;line-height:1.4}
 .chat-msg.me{background:rgba(0,245,255,.07);border-left:2px solid var(--cyan)}
 .chat-msg.them{background:rgba(255,45,120,.05);border-left:2px solid rgba(255,45,120,.4)}
-.chat-msg.sys{background:rgba(255,230,0,.04);border-left:2px solid rgba(255,230,0,.3);font-size:.75rem;color:rgba(255,230,0,.6);font-style:italic}
-.msg-author{font-family:'Orbitron',monospace;font-size:.52rem;font-weight:700;letter-spacing:.08em;margin-bottom:.15rem}
+.chat-msg.sys{font-size:.72rem;color:rgba(255,230,0,.55);font-style:italic;padding:.2rem .5rem}
+.msg-author{font-family:'Orbitron',monospace;font-size:.5rem;font-weight:700;letter-spacing:.08em;margin-bottom:.1rem}
 .msg-author.me{color:var(--cyan)}.msg-author.them{color:var(--pink)}
 .msg-text{color:var(--text);font-weight:600}
-
-/* Input row — fixo no fundo, sobe com o teclado via JS */
-.chat-input-row{display:flex;gap:.4rem;padding:.6rem;border-top:1px solid rgba(0,245,255,.08);align-items:center;flex-shrink:0;background:rgba(4,8,16,.98)}
-.chat-input-row input{flex:1;padding:.5rem .65rem;background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.12);border-radius:2px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;-webkit-appearance:none;appearance:none;caret-color:var(--cyan)}
-.chat-input-row input::placeholder{color:rgba(224,244,255,.12)}
-.chat-input-row input:focus{border-color:rgba(0,245,255,.3);background:rgba(0,245,255,.05)}
-
-/* VOICE */
-.voice-status{font-family:'Orbitron',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;text-align:center;color:var(--dim)}
-.voice-status.listening{color:var(--pink);text-shadow:0 0 10px var(--pink);animation:aGlow 1s infinite}
-.mic-btn{width:70px;height:70px;border-radius:50%;border:2px solid var(--pink);background:radial-gradient(circle at 40% 35%,rgba(255,45,120,.15),rgba(255,45,120,.03) 70%);color:var(--pink);font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 0 14px rgba(255,45,120,.22);touch-action:manipulation}
-.mic-btn.active{box-shadow:0 0 28px rgba(255,45,120,.6),0 0 55px rgba(255,45,120,.28);animation:sGlow 1s infinite}
-
-/* RESULTS */
+.chat-inp-row{display:flex;gap:.4rem;padding:.5rem .6rem;border-top:1px solid rgba(0,245,255,.08);align-items:center}
+/* font-size 16px aqui também — evita zoom quando foca no campo de chat */
+.chat-inp-row input{flex:1;padding:.5rem .65rem;background:rgba(0,245,255,.03);border:1px solid rgba(0,245,255,.12);border-radius:2px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;outline:none;-webkit-appearance:none;appearance:none;caret-color:var(--cyan)}
+.chat-inp-row input:focus{border-color:rgba(0,245,255,.3);background:rgba(0,245,255,.05)}
+/* results */
 .r-header{text-align:center;margin-bottom:1.5rem}
-.r-letter-ring{display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border-radius:50%;border:2px solid var(--pink);font-family:'Orbitron',monospace;font-size:2.6rem;font-weight:900;color:white;text-shadow:0 0 10px var(--pink),0 0 28px var(--pink);box-shadow:0 0 18px rgba(255,45,120,.3);margin-bottom:.75rem}
+.r-letter-ring{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:2px solid var(--pink);font-family:'Orbitron',monospace;font-size:2.4rem;font-weight:900;color:white;text-shadow:0 0 10px var(--pink),0 0 28px var(--pink);margin-bottom:.75rem}
 .scoreboard{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:1.25rem}
 .schip{display:flex;align-items:center;gap:.4rem;padding:.4rem .85rem;border-radius:2px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.06em;border:1px solid}
 .sc-me{color:var(--green);border-color:rgba(57,255,20,.35);background:rgba(57,255,20,.06)}
 .sc-other{color:var(--cyan);border-color:rgba(0,245,255,.2);background:rgba(0,245,255,.04)}
 .cat-result{margin-bottom:1.5rem}
 .cr-title{font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase;margin-bottom:.5rem;padding-bottom:.35rem;border-bottom:1px solid rgba(0,245,255,.1)}
-.ans-rows{display:flex;flex-direction:column;gap:.35rem}
-.ans-row{display:flex;align-items:center;gap:.6rem;padding:.55rem .8rem;border-radius:2px;border-left:2px solid}
+.ans-rows{display:flex;flex-direction:column;gap:.3rem}
+.ans-row{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:2px;border-left:2px solid}
 .ans-row.p10{background:rgba(57,255,20,.04);border-left-color:var(--green)}
 .ans-row.p5{background:rgba(255,230,0,.04);border-left-color:var(--yellow)}
-.ans-row.p0{background:rgba(255,45,120,.03);border-left-color:rgba(255,45,120,.3)}
-.an-player{font-weight:700;font-size:.82rem;min-width:5.5rem;flex-shrink:0}
+.ans-row.p0{background:rgba(255,45,120,.03);border-left-color:rgba(255,45,120,.25)}
+.an-player{font-weight:700;font-size:.8rem;min-width:5rem;flex-shrink:0}
 .an-player.me{color:var(--green)}.an-player.them{color:var(--dim)}
-.an-word{flex:1;font-size:.95rem;font-weight:700;color:var(--text);word-break:break-word}
-.an-word.empty{color:rgba(224,244,255,.15);font-style:italic;font-size:.8rem;font-weight:400}
-.an-pts{font-family:'Orbitron',monospace;font-size:.75rem;font-weight:700;flex-shrink:0}
-.an-pts.g{color:var(--green)}.an-pts.y{color:var(--yellow)}.an-pts.r{color:rgba(255,45,120,.45)}
-
-/* FINAL */
-.trophy-wrap{text-align:center;font-size:4.5rem;line-height:1;animation:tDrop .6s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 0 18px rgba(255,230,0,.8));margin-bottom:.6rem}
-@keyframes tDrop{from{transform:translateY(-35px)scale(.5);opacity:0}to{transform:translateY(0)scale(1);opacity:1}}
-.winner-line{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;text-align:center;letter-spacing:.08em;color:var(--yellow);text-shadow:0 0 12px var(--yellow),0 0 35px rgba(255,230,0,.4);margin-bottom:1.75rem;text-transform:uppercase}
-.rank-row{display:flex;align-items:center;gap:.85rem;padding:.9rem 1rem;border-radius:2px;animation:rowSlide .4s ease both}
+.an-word{flex:1;font-size:.92rem;font-weight:700;color:var(--text);word-break:break-word}
+.an-word.empty{color:rgba(224,244,255,.15);font-style:italic;font-size:.78rem;font-weight:400}
+.an-pts{font-family:'Orbitron',monospace;font-size:.72rem;font-weight:700;flex-shrink:0}
+.an-pts.g{color:var(--green)}.an-pts.y{color:var(--yellow)}.an-pts.r{color:rgba(255,45,120,.4)}
+/* final */
+.trophy-wrap{text-align:center;font-size:4rem;line-height:1;margin-bottom:.6rem}
+.winner-line{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;text-align:center;letter-spacing:.08em;color:var(--yellow);text-shadow:0 0 12px var(--yellow);margin-bottom:1.75rem;text-transform:uppercase}
+.rank-row{display:flex;align-items:center;gap:.85rem;padding:.9rem 1rem;border-radius:2px;margin-bottom:.5rem}
 .rk1{background:rgba(255,230,0,.06);border:1px solid rgba(255,230,0,.3)}
 .rk2{background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15)}
 .rk3{background:rgba(191,95,255,.04);border:1px solid rgba(191,95,255,.2)}
 .rkn{background:rgba(224,244,255,.02);border:1px solid rgba(224,244,255,.06)}
-.rank-medal{font-size:1.5rem;flex-shrink:0}
+.rank-medal{font-size:1.4rem;flex-shrink:0}
 .rank-name{flex:1;font-weight:700;font-size:.95rem}
 .rank-you{font-family:'Orbitron',monospace;font-size:.5rem;color:var(--green);letter-spacing:.08em;margin-left:.35rem}
 .rank-pts{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;color:var(--yellow)}
-
-/* RECONNECT OVERLAY */
-.rc-overlay{position:fixed;inset:0;background:rgba(4,8,16,.95);backdrop-filter:blur(10px);z-index:9990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem}
-.rc-spinner{width:52px;height:52px;border:3px solid rgba(0,245,255,.15);border-top-color:var(--cyan);border-radius:50%;animation:spin 1s linear infinite}
+/* overlay reconectando */
+.rc-overlay{position:fixed;inset:0;background:rgba(4,8,16,.96);backdrop-filter:blur(10px);z-index:9990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem}
+.rc-spinner{width:48px;height:48px;border:3px solid rgba(0,245,255,.15);border-top-color:var(--cyan);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.rc-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase;text-shadow:0 0 14px var(--cyan);animation:aGlow 1.5s infinite}
+.rc-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;letter-spacing:.15em;color:var(--cyan);text-transform:uppercase}
 .rc-sub{font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase}
-
-/* TOAST */
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(7,17,31,.97);backdrop-filter:blur(16px);color:var(--cyan);padding:.65rem 1.4rem;border:1px solid rgba(0,245,255,.25);border-radius:2px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 0 18px rgba(0,245,255,.15),0 8px 28px rgba(0,0,0,.5);z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;max-width:90vw;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
-
+/* toast */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%)translateY(80px);background:rgba(7,17,31,.97);backdrop-filter:blur(16px);color:var(--cyan);padding:.65rem 1.4rem;border:1px solid rgba(0,245,255,.25);border-radius:2px;font-family:'Orbitron',monospace;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 8px 28px rgba(0,0,0,.5);z-index:9999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%)translateY(0)}
+/* utils */
 .gap-v{display:flex;flex-direction:column;gap:.65rem}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
 .mt{margin-top:.65rem}.mt2{margin-top:1rem}.center{text-align:center}
-.empty-state{text-align:center;font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--dim);padding:1.25rem;text-transform:uppercase;animation:dotP 2s ease-in-out infinite}
-
-@media(max-width:699px){
-  /* No mobile: esconde o painel de chat inline, mostra FAB */
-  .game-layout > div:last-child > .panel{ display:none !important; }
-  .chat-fab{ display:flex; }
-}
+.empty-state{text-align:center;font-family:'Orbitron',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--dim);padding:1.25rem;text-transform:uppercase}
 @media(min-width:700px){
   .lobby-grid{gap:1.25rem}
-  .game-layout{display:grid;grid-template-columns:1fr 300px;gap:1.25rem;align-items:start}
-  .chat-msgs{height:300px}
-  /* No desktop: chat inline normal, sem drawer/FAB */
-  .chat-drawer{ display:none !important; }
-  .chat-fab{ display:none !important; }
   .hud-timer{font-size:3.5rem}
-  .letter-ring{width:120px;height:120px}
-  .letter-char{font-size:5rem}
-  .stop-btn{width:120px;height:120px}
-  .cat-input{font-size:1rem}
-  .field input{font-size:1rem}
+  .letter-ring{width:110px;height:110px}
+  .letter-char{font-size:4.8rem}
+  .stop-btn{width:115px;height:115px}
+  .chat-msgs{height:260px}
 }
 </style>
 </head>
 <body>
-<div class="orb o1"></div>
-<div class="orb o2"></div>
-<div class="orb o3"></div>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 <div id="app">
 
 <!-- HOME -->
 <div id="screen-home" class="screen active">
   <div style="padding-top:2rem;margin-bottom:2.5rem">
     <div class="neon-title" style="font-size:clamp(2rem,10vw,4rem)"><span class="np">SALADA</span></div>
-    <div class="neon-title" style="font-size:clamp(1.2rem,6vw,2.4rem);margin-top:.25rem">
-      <span class="nc">DE&nbsp;</span><span class="ng">FRUTA</span>
-    </div>
-    <div style="text-align:center;margin-top:.75rem">
-      <span style="font-family:'Orbitron',monospace;font-size:.58rem;letter-spacing:.3em;color:rgba(0,245,255,.3);text-transform:uppercase">◈ STOP ONLINE ◈</span>
-    </div>
+    <div class="neon-title" style="font-size:clamp(1.2rem,6vw,2.4rem);margin-top:.25rem"><span class="nc">DE&nbsp;</span><span class="ng">FRUTA</span></div>
+    <div style="text-align:center;margin-top:.75rem"><span style="font-family:'Orbitron',monospace;font-size:.58rem;letter-spacing:.3em;color:rgba(0,245,255,.3);text-transform:uppercase">◈ STOP ONLINE ◈</span></div>
   </div>
   <div style="max-width:400px;margin:0 auto">
     <div class="panel">
@@ -307,9 +215,7 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
 <div id="screen-lobby" class="screen">
   <div style="margin-bottom:1.5rem">
     <div class="neon-title nc" style="font-size:clamp(1.3rem,5vw,2.2rem)">SALA DE ESPERA</div>
-    <div style="text-align:center;margin-top:.4rem">
-      <span id="lob-count" style="font-family:'Orbitron',monospace;font-size:.58rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase">Aguardando...</span>
-    </div>
+    <div style="text-align:center;margin-top:.4rem"><span id="lob-count" style="font-family:'Orbitron',monospace;font-size:.58rem;letter-spacing:.18em;color:var(--dim);text-transform:uppercase">Aguardando...</span></div>
   </div>
   <div class="lobby-grid">
     <div>
@@ -333,9 +239,7 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
     <div>
       <div class="panel" style="margin-bottom:.75rem">
         <div class="ptag">Jogadores <span id="lob-count-n" style="color:var(--cyan)">(0)</span></div>
-        <div class="plist" id="lob-players" style="margin-top:.6rem">
-          <div class="empty-state">Aguardando...</div>
-        </div>
+        <div class="plist" id="lob-players" style="margin-top:.6rem"><div class="empty-state">Aguardando...</div></div>
       </div>
       <div class="gap-v">
         <button class="btn btn-green" id="btn-start" onclick="startGame()" disabled>▶ Iniciar</button>
@@ -351,66 +255,28 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
     <div class="hud-round">Rodada <span id="g-round">1</span>/5</div>
     <div class="hud-timer" id="g-timer">60</div>
   </div>
-  <div class="game-layout">
-    <div>
-      <div class="letter-stage">
-        <div class="letter-ring"><span class="letter-char" id="g-letter">A</span></div>
-      </div>
-      <div id="g-alert" class="stop-alert" style="display:none"></div>
-      <div class="panel" style="padding:1.1rem">
-        <div class="cat-grid" id="g-cats"></div>
-      </div>
-      <div class="stop-stage">
-        <button class="stop-btn" id="stop-btn" onclick="pressStop()">
-          <span class="si">✋</span><span>STOP</span>
-        </button>
-      </div>
-    </div>
-    <div>
-      <div class="panel" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-        <div class="ptag">Chat</div>
-        <div style="margin-top:1.4rem;display:flex;flex-direction:column;flex:1">
-          <div class="chat-tabs">
-            <button class="chat-tab active" id="tab-text" onclick="switchTab('text')">💬 Texto</button>
-            <button class="chat-tab" id="tab-voice" onclick="switchTab('voice')">🎙️ Voz</button>
-          </div>
-          <div id="chat-text" style="display:flex;flex-direction:column;flex:1">
-            <div class="chat-msgs" id="chat-msgs-desktop"></div>
-            <div class="chat-input-row">
-              <input type="text" id="chat-inp-desktop" placeholder="mensagem..." maxlength="120" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat('desktop')}">
-              <button class="btn btn-cyan btn-icon" onclick="sendChat('desktop')">▶</button>
-            </div>
-          </div>
-          <div id="chat-voice" style="display:none;flex-direction:column;flex:1;align-items:center;justify-content:center;gap:1rem;padding:1.25rem">
-            <div class="voice-status" id="voice-status">// Chat de Voz</div>
-            <div id="voice-peers" style="display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;min-height:2rem"></div>
-            <button class="mic-btn" id="mic-btn" onclick="toggleVoice()">🎙️</button>
-            <div id="voice-label" style="color:var(--dim);font-size:.75rem;text-align:center;font-family:'Rajdhani',sans-serif">Clique para entrar no canal</div>
-            <audio id="remote-audio" autoplay style="display:none"></audio>
-          </div>
-        </div>
-      </div>
+  <div class="letter-stage">
+    <div class="letter-ring"><span class="letter-char" id="g-letter">A</span></div>
+  </div>
+  <div id="g-alert" class="stop-alert" style="display:none"></div>
+  <div class="panel" style="padding:1.1rem">
+    <div class="cat-grid" id="g-cats"></div>
+  </div>
+  <div class="stop-stage">
+    <button class="stop-btn" id="stop-btn" onclick="pressStop()">
+      <span class="si">✋</span><span>STOP</span>
+    </button>
+  </div>
+  <!-- CHAT: painel simples, rola com a página — sem drawer, sem FAB, sem bug -->
+  <div class="chat-panel">
+    <div class="chat-head">💬 Chat</div>
+    <div class="chat-msgs" id="chat-msgs"></div>
+    <div class="chat-inp-row">
+      <input type="text" id="chat-inp" placeholder="mensagem..." maxlength="120" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat()}">
+      <button class="btn btn-cyan btn-icon" onclick="sendChat()">▶</button>
     </div>
   </div>
 </div>
-
-<!-- FAB chat (mobile only) -->
-<button class="chat-fab" id="chat-fab" onclick="openChatDrawer()">
-  💬
-  <div class="fab-badge" id="fab-badge">0</div>
-</button>
-
-<!-- Chat Drawer (mobile only) -->
-<div class="chat-drawer" id="chat-drawer">
-  <div class="chat-drawer-header">
-    <span class="chat-drawer-title">💬 Chat</span>
-    <button class="chat-drawer-close" onclick="closeChatDrawer()">✕</button>
-  </div>
-  <div class="chat-msgs" id="chat-msgs-mobile"></div>
-  <div class="chat-input-row">
-    <input type="text" id="chat-inp-mobile" placeholder="mensagem..." maxlength="120" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();sendChat('mobile')}">
-    <button class="btn btn-cyan btn-icon" onclick="sendChat('mobile')">▶</button>
-  </div>
 
 <!-- RESULTS -->
 <div id="screen-results" class="screen">
@@ -432,7 +298,7 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
   <div class="winner-line" id="f-winner"></div>
   <div class="panel" style="max-width:540px;margin:0 auto 1.25rem;padding:1.5rem">
     <div class="ptag yw">Ranking Final</div>
-    <div id="f-ranking" style="margin-top:.65rem;display:flex;flex-direction:column;gap:.6rem"></div>
+    <div id="f-ranking" style="margin-top:.65rem"></div>
   </div>
   <div class="two-col" style="max-width:420px;margin:0 auto">
     <button class="btn btn-cyan" onclick="playAgain()">↺ Revanche</button>
@@ -444,10 +310,10 @@ body::after{content:'';position:fixed;inset:0;z-index:1;
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import { initializeApp }  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getAnalytics }   from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+import { getAnalytics }  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js';
 import { getDatabase, ref, set, get, update, onValue, push, remove, goOnline, goOffline }
-                          from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+  from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
 const fbApp = initializeApp({
   apiKey:'AIzaSyBdxd54oFM3eWH1duC5BTdJzjGGRDLMq-Q',
@@ -462,645 +328,412 @@ const fbApp = initializeApp({
 getAnalytics(fbApp);
 const db = getDatabase(fbApp);
 
-// ── PID persistente em localStorage (sobrevive minimize/WhatsApp/reload) ──────
+// PID persistente
 const pid = (() => {
   let id = localStorage.getItem('sf_pid');
-  if (!id) { id = 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2,8); localStorage.setItem('sf_pid', id); }
+  if (!id) { id = 'p_'+Date.now()+'_'+Math.random().toString(36).substr(2,8); localStorage.setItem('sf_pid',id); }
   return id;
 })();
 
 const gs = {
-  roomId: null, roomCode: null, isHost: false,
-  name: localStorage.getItem('sf_name') || '',
-  answers: {}, timerInterval: null,
-  unsub: null, chatUnsub: null,
-  round: -1, saved: false, calcPending: false,
+  roomId:null, roomCode:null, isHost:false,
+  name: localStorage.getItem('sf_name')||'',
+  answers:{}, timerInterval:null,
+  unsub:null, chatUnsub:null,
+  round:-1, saved:false,
 };
 
 const CATS = [
-  {id:'person',label:'Nome de Pessoa'},
-  {id:'animal',label:'Animal'},
-  {id:'fruit',label:'Fruta'},
-  {id:'city',label:'Cidade'},
-  {id:'object',label:'Objeto'},
-  {id:'profession',label:'Profissão'},
-  {id:'color',label:'Cor'},
-  {id:'brand',label:'Marca'},
+  {id:'person',label:'Nome de Pessoa'},{id:'animal',label:'Animal'},
+  {id:'fruit',label:'Fruta'},{id:'city',label:'Cidade'},
+  {id:'object',label:'Objeto'},{id:'profession',label:'Profissão'},
+  {id:'color',label:'Cor'},{id:'brand',label:'Marca'},
 ];
 
-const $ = id => document.getElementById(id);
+const $  = id => document.getElementById(id);
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const rnd6 = () => [...Array(6)].map(()=>'ABCDEFGHJKLMNPQRSTUVWXYZ'[Math.floor(Math.random()*24)]).join('');
 const rndL = () => 'ABCDEFGHIJLMNOPRSTV'[Math.floor(Math.random()*19)];
 
 let toastTm;
 const toast = msg => {
-  const el = $('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toastTm);
-  toastTm = setTimeout(() => el.classList.remove('show'), 3000);
+  const el=$('toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastTm); toastTm=setTimeout(()=>el.classList.remove('show'),3000);
 };
 
 const showScreen = id => {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  $('screen-' + id).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $('screen-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 };
 
-// ── SALVAR/LER SESSÃO ─────────────────────────────────────────
+// sessão
 const saveSession = () => {
   if (!gs.roomId) return;
-  localStorage.setItem('sf_session', JSON.stringify({
-    roomId: gs.roomId, roomCode: gs.roomCode, name: gs.name, isHost: gs.isHost, ts: Date.now()
-  }));
+  localStorage.setItem('sf_session', JSON.stringify({roomId:gs.roomId,roomCode:gs.roomCode,name:gs.name,isHost:gs.isHost,ts:Date.now()}));
 };
-
 const clearSession = () => localStorage.removeItem('sf_session');
 
-// ── CRIAR SALA ────────────────────────────────────────────────
+// criar sala
 window.createRoom = async () => {
-  const name = $('inp-name').value.trim();
-  if (!name) { toast('// INSIRA SEU APELIDO'); return; }
-  const code = rnd6();
-  const roomRef = push(ref(db, 'rooms'));
-  const roomId = roomRef.key;
-  gs.roomId = roomId; gs.roomCode = code; gs.name = name; gs.isHost = true;
-  localStorage.setItem('sf_name', name);
-  saveSession();
-  await set(roomRef, {
-    code, createdAt: Date.now(),
-    players: { [pid]: { name, score: 0, isHost: true, ts: Date.now() } },
-    gameState: { status: 'waiting', letter: null, round: 0, timer: 60, stopped: false, stoppedBy: null },
-    answers: { _: 0 }, chat: { _: 0 },
+  const name=$('inp-name').value.trim();
+  if (!name){toast('// INSIRA SEU APELIDO');return;}
+  const code=rnd6(), roomRef=push(ref(db,'rooms')), roomId=roomRef.key;
+  gs.roomId=roomId; gs.roomCode=code; gs.name=name; gs.isHost=true;
+  localStorage.setItem('sf_name',name); saveSession();
+  await set(roomRef,{
+    code, createdAt:Date.now(),
+    players:{[pid]:{name,score:0,isHost:true,ts:Date.now()}},
+    gameState:{status:'waiting',letter:null,round:0,timer:60,stopped:false,stoppedBy:null},
+    answers:{_:0}, chat:{_:0},
   });
-  toast('// SALA CRIADA: ' + code);
-  showScreen('lobby');
-  listenRoom(roomId);
+  toast('// SALA CRIADA: '+code);
+  showScreen('lobby'); listenRoom(roomId);
 };
 
-// ── ENTRAR NA SALA ────────────────────────────────────────────
+// entrar
 window.joinRoom = async () => {
-  const name = $('inp-name').value.trim();
-  const code = $('inp-code').value.trim().toUpperCase();
-  if (!name) { toast('// INSIRA SEU APELIDO'); return; }
-  if (!code) { toast('// INSIRA O CÓDIGO'); return; }
-  const snap = await get(ref(db, 'rooms'));
-  const rooms = snap.val() || {};
-  let foundId = null;
-  Object.keys(rooms).forEach(id => { if (rooms[id].code === code) foundId = id; });
-  if (!foundId) { toast('// SALA NÃO ENCONTRADA'); return; }
-  const room = rooms[foundId];
-  const alreadyIn = room.players?.[pid];
-  const isFull = Object.keys(room.players || {}).length >= 6;
-  if (!alreadyIn && isFull) { toast('// SALA CHEIA'); return; }
-  // Permite entrar mesmo em partida se já estava na sala (reconexão manual)
-  if (!alreadyIn && room.gameState?.status !== 'waiting') { toast('// PARTIDA EM ANDAMENTO'); return; }
-  gs.roomId = foundId; gs.roomCode = code; gs.name = name; gs.isHost = !!room.players?.[pid]?.isHost;
-  localStorage.setItem('sf_name', name);
-  saveSession();
-  await update(ref(db, `rooms/${foundId}/players/${pid}`), {
-    name, score: room.players?.[pid]?.score || 0, isHost: gs.isHost, ts: Date.now()
-  });
-  toast('// CONECTADO');
-  showScreen('lobby');
-  listenRoom(foundId);
+  const name=$('inp-name').value.trim();
+  const code=$('inp-code').value.trim().toUpperCase();
+  if (!name){toast('// INSIRA SEU APELIDO');return;}
+  if (!code){toast('// INSIRA O CÓDIGO');return;}
+  const snap=await get(ref(db,'rooms'));
+  const rooms=snap.val()||{};
+  let foundId=null;
+  Object.keys(rooms).forEach(id=>{if(rooms[id].code===code)foundId=id;});
+  if (!foundId){toast('// SALA NÃO ENCONTRADA');return;}
+  const room=rooms[foundId];
+  const alreadyIn=room.players?.[pid];
+  if (!alreadyIn && Object.keys(room.players||{}).length>=6){toast('// SALA CHEIA');return;}
+  if (!alreadyIn && room.gameState?.status!=='waiting'){toast('// PARTIDA EM ANDAMENTO');return;}
+  gs.roomId=foundId; gs.roomCode=code; gs.name=name; gs.isHost=!!room.players?.[pid]?.isHost;
+  localStorage.setItem('sf_name',name); saveSession();
+  await update(ref(db,`rooms/${foundId}/players/${pid}`),{name,score:room.players?.[pid]?.score||0,isHost:gs.isHost,ts:Date.now()});
+  toast('// CONECTADO'); showScreen('lobby'); listenRoom(foundId);
 };
 
-// ── RECONEXÃO AUTOMÁTICA ──────────────────────────────────────
-// Chamada ao carregar a página E ao voltar da aba de outro app (visibilitychange)
-async function tryReconnect(silent = false) {
-  const raw = localStorage.getItem('sf_session');
+// reconexão
+async function tryReconnect(silent=false) {
+  const raw=localStorage.getItem('sf_session');
   if (!raw) return false;
-  let session;
-  try { session = JSON.parse(raw); } catch { return false; }
-  if (!session?.roomId || !session?.name) return false;
-  // Sessão muito antiga (mais de 6h) — descarta
-  if (Date.now() - (session.ts || 0) > 6 * 3600 * 1000) { clearSession(); return false; }
-
-  let overlay = null;
-  if (!silent) {
-    overlay = document.createElement('div');
-    overlay.className = 'rc-overlay';
-    overlay.innerHTML = '<div class="rc-spinner"></div><div class="rc-title">// Reconectando...</div><div class="rc-sub">Verificando sala</div>';
+  let session; try{session=JSON.parse(raw);}catch{return false;}
+  if (!session?.roomId||!session?.name) return false;
+  if (Date.now()-(session.ts||0)>6*3600*1000){clearSession();return false;}
+  let overlay=null;
+  if (!silent){
+    overlay=document.createElement('div');
+    overlay.className='rc-overlay';
+    overlay.innerHTML='<div class="rc-spinner"></div><div class="rc-title">// Reconectando...</div><div class="rc-sub">Verificando sala</div>';
     document.body.appendChild(overlay);
   }
-
   try {
-    // Força reconexão do Firebase (resolve problema de WebSocket perdido ao voltar do WhatsApp)
-    goOffline(db);
-    await new Promise(r => setTimeout(r, 200));
-    goOnline(db);
-
-    const snap = await get(ref(db, `rooms/${session.roomId}`));
-    const data = snap.val();
-    if (!data) { clearSession(); overlay?.remove(); return false; }
-
-    gs.roomId = session.roomId;
-    gs.roomCode = session.roomCode || data.code;
-    gs.name = session.name;
-    gs.isHost = !!data.players?.[pid]?.isHost;
-    localStorage.setItem('sf_name', session.name);
-    saveSession();
-
-    // Re-registra presença
-    await update(ref(db, `rooms/${session.roomId}/players/${pid}`), {
-      name: session.name,
-      score: data.players?.[pid]?.score || 0,
-      isHost: gs.isHost,
-      ts: Date.now()
-    });
-
+    goOffline(db); await new Promise(r=>setTimeout(r,200)); goOnline(db);
+    const snap=await get(ref(db,`rooms/${session.roomId}`));
+    const data=snap.val();
+    if (!data){clearSession();overlay?.remove();return false;}
+    gs.roomId=session.roomId; gs.roomCode=session.roomCode||data.code;
+    gs.name=session.name; gs.isHost=!!data.players?.[pid]?.isHost;
+    localStorage.setItem('sf_name',session.name); saveSession();
+    await update(ref(db,`rooms/${session.roomId}/players/${pid}`),{name:session.name,score:data.players?.[pid]?.score||0,isHost:gs.isHost,ts:Date.now()});
     overlay?.remove();
     if (!silent) toast('// RECONECTADO ✓');
-
-    // Se já tinha listeners, cancela para evitar duplicatas
-    gs.unsub?.(); gs.unsub = null;
-    gs.chatUnsub?.(); gs.chatUnsub = null;
-    gs.round = -1; // força re-render dos campos
-
-    listenRoom(session.roomId);
-    return true;
-  } catch (e) {
-    overlay?.remove();
-    return false;
-  }
+    gs.unsub?.(); gs.unsub=null; gs.chatUnsub?.(); gs.chatUnsub=null;
+    gs.round=-1;
+    listenRoom(session.roomId); return true;
+  } catch(e){overlay?.remove();return false;}
 }
 
-// ── VISIBILITYCHANGE: reconecta ao voltar do WhatsApp / minimizar ─────────────
-let wasHidden = false;
-document.addEventListener('visibilitychange', async () => {
-  if (document.hidden) {
-    wasHidden = true;
-  } else if (wasHidden) {
-    wasHidden = false;
-    if (gs.roomId) {
-      // Já está numa sala — reconecta silenciosamente
-      try {
-        goOffline(db);
-        await new Promise(r => setTimeout(r, 150));
-        goOnline(db);
-        // Re-registra presença (pode ter expirado)
-        await update(ref(db, `rooms/${gs.roomId}/players/${pid}`), {
-          name: gs.name, score: undefined, isHost: gs.isHost, ts: Date.now()
-        });
-      } catch {}
+// visibilitychange — volta do WhatsApp
+let wasHidden=false;
+document.addEventListener('visibilitychange', async ()=>{
+  if (document.hidden){wasHidden=true;}
+  else if (wasHidden){
+    wasHidden=false;
+    try{goOffline(db);await new Promise(r=>setTimeout(r,150));goOnline(db);}catch{}
+    if (gs.roomId){
+      try{await update(ref(db,`rooms/${gs.roomId}/players/${pid}`),{name:gs.name,isHost:gs.isHost,ts:Date.now()});}catch{}
     } else {
-      // Não está em sala, tenta reconectar sessão salva
-      const ok = await tryReconnect(true);
+      const ok=await tryReconnect(true);
       if (ok) toast('// RECONECTADO ✓');
     }
   }
 });
 
-// ── PAGE FOCUS como fallback extra ────────────────────────────
-window.addEventListener('focus', async () => {
-  if (gs.roomId) {
-    try {
-      goOffline(db);
-      await new Promise(r => setTimeout(r, 100));
-      goOnline(db);
-    } catch {}
-  }
-});
-
-// ── LISTENER DA SALA ──────────────────────────────────────────
-function listenRoom(roomId) {
-  // Cancela listeners anteriores antes de criar novos
-  gs.unsub?.(); gs.unsub = null;
-  gs.chatUnsub?.(); gs.chatUnsub = null;
-
-  gs.unsub = onValue(ref(db, `rooms/${roomId}`), snap => {
-    const data = snap.val();
-    if (!data) return;
+// listener da sala
+function listenRoom(roomId){
+  gs.unsub?.(); gs.unsub=null; gs.chatUnsub?.(); gs.chatUnsub=null;
+  gs.unsub=onValue(ref(db,`rooms/${roomId}`),snap=>{
+    const data=snap.val(); if(!data) return;
     renderLobby(data);
-    const s = data.gameState?.status;
-    if      (s === 'playing') { showScreen('game');    renderGame(data); }
-    else if (s === 'results') { showScreen('results'); renderResults(data); }
-    else if (s === 'final')   { showScreen('final');   renderFinal(data); }
-    else                      { showScreen('lobby'); }
+    const s=data.gameState?.status;
+    if      (s==='playing'){showScreen('game');   renderGame(data);}
+    else if (s==='results'){showScreen('results');renderResults(data);}
+    else if (s==='final')  {showScreen('final');  renderFinal(data);}
+    else                   {showScreen('lobby');}
   });
-
-  gs.chatUnsub = onValue(ref(db, `rooms/${roomId}/chat`), snap => {
-    renderChatMsgs(snap.val() || {});
-  });
-}
-
-// ── CHAT ──────────────────────────────────────────────────────
-window.switchTab = tab => {
-  $('tab-text').classList.toggle('active', tab === 'text');
-  $('tab-voice').classList.toggle('active', tab === 'voice');
-  $('chat-text').style.display  = tab === 'text'  ? 'flex' : 'none';
-  $('chat-voice').style.display = tab === 'voice' ? 'flex' : 'none';
-};
-
-let chatDrawerOpen = false;
-let unreadCount = 0;
-
-window.openChatDrawer = () => {
-  chatDrawerOpen = true;
-  $('chat-drawer').classList.add('open');
-  unreadCount = 0;
-  const badge = $('fab-badge');
-  badge.textContent = '0';
-  badge.classList.remove('show');
-  // Foca o input depois da animação
-  setTimeout(() => {
-    $('chat-inp-mobile')?.focus();
-    const msgs = $('chat-msgs-mobile');
-    if (msgs) msgs.scrollTop = msgs.scrollHeight;
-  }, 50);
-};
-
-window.closeChatDrawer = () => {
-  chatDrawerOpen = false;
-  $('chat-drawer').classList.remove('open');
-  // Fecha teclado
-  $('chat-inp-mobile')?.blur();
-};
-
-// Sobe o drawer quando o teclado abre (visualViewport API)
-if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', () => {
-    const drawer = $('chat-drawer');
-    if (!drawer || !chatDrawerOpen) return;
-    const vv = window.visualViewport;
-    const offsetFromBottom = window.innerHeight - vv.height - vv.offsetTop;
-    drawer.style.bottom = Math.max(0, offsetFromBottom) + 'px';
-  });
-  window.visualViewport.addEventListener('scroll', () => {
-    const drawer = $('chat-drawer');
-    if (!drawer || !chatDrawerOpen) return;
-    const vv = window.visualViewport;
-    const offsetFromBottom = window.innerHeight - vv.height - vv.offsetTop;
-    drawer.style.bottom = Math.max(0, offsetFromBottom) + 'px';
+  gs.chatUnsub=onValue(ref(db,`rooms/${roomId}/chat`),snap=>{
+    renderChatMsgs(snap.val()||{});
   });
 }
 
-window.sendChat = async (src) => {
-  const inp = src === 'mobile' ? $('chat-inp-mobile') : $('chat-inp-desktop');
-  if (!inp) return;
-  const txt = inp.value.trim();
-  if (!txt || !gs.roomId) return;
-  inp.value = '';
-  inp.focus();
-  await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { pid, name: gs.name, text: txt, ts: Date.now() });
+// chat
+window.sendChat = async ()=>{
+  const inp=$('chat-inp');
+  const txt=inp.value.trim();
+  if (!txt||!gs.roomId) return;
+  inp.value='';
+  await set(push(ref(db,`rooms/${gs.roomId}/chat`)),{pid,name:gs.name,text:txt,ts:Date.now()});
 };
 
-function renderChatMsgs(data) {
-  const entries = Object.entries(data).filter(([k]) => k !== '_').map(([,v]) => v).sort((a,b) => (a.ts||0)-(b.ts||0));
+function renderChatMsgs(data){
+  const container=$('chat-msgs'); if(!container) return;
+  const entries=Object.entries(data).filter(([k])=>k!=='_').map(([,v])=>v).sort((a,b)=>(a.ts||0)-(b.ts||0));
+  const atBottom=container.scrollHeight-container.scrollTop-container.clientHeight<40;
+  container.innerHTML='';
+  entries.forEach(v=>{
+    const isMe=v.pid===pid,isSys=v.sys;
+    const div=document.createElement('div');
+    div.className='chat-msg '+(isSys?'sys':isMe?'me':'them');
+    if (!isSys){div.innerHTML=`<div class="msg-author ${isMe?'me':'them'}">${esc(v.name)}</div><div class="msg-text">${esc(v.text)}</div>`;}
+    else{div.textContent=v.text;}
+    container.appendChild(div);
+  });
+  if (atBottom) container.scrollTop=container.scrollHeight;
+}
 
-  const buildMsgs = (container) => {
-    if (!container) return;
-    const wasAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 40;
-    container.innerHTML = '';
-    entries.forEach(v => {
-      const isMe = v.pid === pid, isSys = v.sys;
-      const div = document.createElement('div');
-      div.className = 'chat-msg ' + (isSys ? 'sys' : isMe ? 'me' : 'them');
-      if (!isSys) {
-        div.innerHTML = `<div class="msg-author ${isMe?'me':'them'}">${esc(v.name)}</div><div class="msg-text">${esc(v.text)}</div>`;
-      } else { div.textContent = v.text; }
-      container.appendChild(div);
-    });
-    if (wasAtBottom) container.scrollTop = container.scrollHeight;
-  };
-
-  buildMsgs($('chat-msgs-desktop'));
-  buildMsgs($('chat-msgs-mobile'));
-
-  // Badge de não lidos quando drawer fechado
-  if (!chatDrawerOpen && window.innerWidth < 700) {
-    const lastEntry = entries[entries.length - 1];
-    if (lastEntry && lastEntry.pid !== pid) {
-      unreadCount++;
-      const badge = $('fab-badge');
-      if (badge) {
-        badge.textContent = unreadCount > 9 ? '9+' : String(unreadCount);
-        badge.classList.add('show');
-      }
-    }
+// voice chat
+let voiceActive=false, localStream=null;
+const peerConns={}, iceQueue={};
+const RTC_CFG={iceServers:[{urls:'stun:stun.l.google.com:19302'}]};
+async function leaveVoice(){
+  voiceActive=false;
+  localStream?.getTracks().forEach(t=>t.stop()); localStream=null;
+  Object.keys(peerConns).forEach(p=>{peerConns[p]?.close();delete peerConns[p];delete iceQueue[p];});
+  if (gs.roomId){
+    await remove(ref(db,`rooms/${gs.roomId}/voice/${pid}`)).catch(()=>{});
+    await remove(ref(db,`rooms/${gs.roomId}/signal/${pid}`)).catch(()=>{});
   }
 }
 
-// ── VOICE CHAT ────────────────────────────────────────────────
-let voiceActive = false, localStream = null;
-const peerConns = {}, iceQueue = {};
-const RTC_CFG = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
-
-window.toggleVoice = async () => voiceActive ? leaveVoice() : joinVoice();
-
-async function joinVoice() {
-  try { localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); }
-  catch { toast('// ERRO: MICROFONE NEGADO'); return; }
-  voiceActive = true;
-  $('mic-btn').classList.add('active');
-  $('voice-status').className = 'voice-status listening';
-  $('voice-status').textContent = '// Conectado';
-  $('voice-label').textContent = 'Clique para sair do canal';
-  await set(ref(db, `rooms/${gs.roomId}/voice/${pid}`), { name: gs.name, ts: Date.now() });
-  onValue(ref(db, `rooms/${gs.roomId}/voice`), async snap => {
-    const all = snap.val() || {};
-    for (const rp of Object.keys(all)) { if (rp !== pid && !peerConns[rp]) await createOffer(rp); }
-    for (const rp of Object.keys(peerConns)) { if (!all[rp]) closePeer(rp); }
-    renderVoicePeers(all);
-  });
-  onValue(ref(db, `rooms/${gs.roomId}/signal/${pid}`), async snap => {
-    const msgs = snap.val() || {};
-    for (const [key, msg] of Object.entries(msgs)) {
-      if (!msg) continue;
-      if (msg.type === 'offer')  await handleOffer(msg.from, msg.sdp);
-      else if (msg.type === 'answer') await handleAnswer(msg.from, msg.sdp);
-      else if (msg.type === 'ice')    await handleIce(msg.from, msg.candidate);
-      await remove(ref(db, `rooms/${gs.roomId}/signal/${pid}/${key}`));
-    }
-  });
-}
-
-async function leaveVoice() {
-  voiceActive = false;
-  localStream?.getTracks().forEach(t => t.stop()); localStream = null;
-  Object.keys(peerConns).forEach(p => closePeer(p));
-  $('mic-btn').classList.remove('active');
-  $('voice-status').className = 'voice-status';
-  $('voice-status').textContent = '// Chat de Voz';
-  $('voice-label').textContent = 'Clique para entrar no canal';
-  $('voice-peers').innerHTML = '';
-  if (gs.roomId) {
-    await remove(ref(db, `rooms/${gs.roomId}/voice/${pid}`)).catch(() => {});
-    await remove(ref(db, `rooms/${gs.roomId}/signal/${pid}`)).catch(() => {});
-  }
-}
-
-function closePeer(rp) { peerConns[rp]?.close(); delete peerConns[rp]; delete iceQueue[rp]; }
-function renderVoicePeers(all) {
-  const c = $('voice-peers'); if (!c) return; c.innerHTML = '';
-  Object.entries(all).forEach(([id, info]) => {
-    const chip = document.createElement('div');
-    chip.style.cssText = 'font-family:Orbitron,monospace;font-size:.58rem;padding:.18rem .55rem;border:1px solid rgba(57,255,20,.4);color:var(--green);border-radius:2px';
-    chip.textContent = (id === pid ? '🎙️ ' : '🔊 ') + esc(info.name || id);
-    c.appendChild(chip);
-  });
-}
-function mkPeer(rp) {
-  const pc = new RTCPeerConnection(RTC_CFG); peerConns[rp] = pc; iceQueue[rp] = [];
-  localStream?.getTracks().forEach(t => pc.addTrack(t, localStream));
-  pc.ontrack = e => { const a = $('remote-audio') || document.createElement('audio'); a.autoplay = true; a.srcObject = e.streams[0]; };
-  pc.onicecandidate = async e => { if (!e.candidate) return; await set(push(ref(db, `rooms/${gs.roomId}/signal/${rp}`)), { type:'ice', from:pid, candidate:e.candidate.toJSON() }); };
-  return pc;
-}
-async function createOffer(rp) { const pc = mkPeer(rp); const o = await pc.createOffer(); await pc.setLocalDescription(o); await set(push(ref(db, `rooms/${gs.roomId}/signal/${rp}`)), { type:'offer', from:pid, sdp:pc.localDescription.sdp }); }
-async function handleOffer(rp, sdp) { if (peerConns[rp]) return; const pc = mkPeer(rp); await pc.setRemoteDescription({type:'offer',sdp}); for (const c of (iceQueue[rp]||[])) await pc.addIceCandidate(new RTCIceCandidate(c)).catch(()=>{}); iceQueue[rp]=[]; const a = await pc.createAnswer(); await pc.setLocalDescription(a); await set(push(ref(db, `rooms/${gs.roomId}/signal/${rp}`)), { type:'answer', from:pid, sdp:pc.localDescription.sdp }); }
-async function handleAnswer(rp, sdp) { const pc = peerConns[rp]; if (!pc) return; await pc.setRemoteDescription({type:'answer',sdp}); for (const c of (iceQueue[rp]||[])) await pc.addIceCandidate(new RTCIceCandidate(c)).catch(()=>{}); iceQueue[rp]=[]; }
-async function handleIce(rp, candidate) { const pc = peerConns[rp]; if (!pc?.remoteDescription) { (iceQueue[rp]=iceQueue[rp]||[]).push(candidate); return; } await pc.addIceCandidate(new RTCIceCandidate(candidate)).catch(()=>{}); }
-
-// ── LOBBY ─────────────────────────────────────────────────────
-function renderLobby(data) {
-  $('lob-code').textContent = data.code || '------';
-  const players = data.players || {};
-  const count = Object.keys(players).length;
-  $('lob-count').textContent = count === 0 ? '// Aguardando conexões...' : `// ${count} jogador${count !== 1 ? 'es' : ''} conectado${count !== 1 ? 's' : ''}`;
-  $('lob-count-n').textContent = `(${count})`;
-  const list = $('lob-players'); list.innerHTML = '';
-  if (count === 0) { list.innerHTML = '<div class="empty-state">Aguardando...</div>'; }
-  else {
-    Object.entries(players).forEach(([id, p]) => {
-      const me = id === pid;
-      const row = document.createElement('div');
-      row.className = 'prow' + (me ? ' me' : p.isHost ? ' host' : '');
-      row.innerHTML = `<div class="pdot ${me?'me':p.isHost?'host':''}"></div><div class="pname">${esc(p.name)}${me ? '<span class="ptag2">[VOCÊ]</span>' : ''}${p.isHost ? '<span class="ptag2 ht">[HOST]</span>' : ''}</div><div class="ppts">${p.score||0}</div>`;
+// lobby
+function renderLobby(data){
+  $('lob-code').textContent=data.code||'------';
+  const players=data.players||{}, count=Object.keys(players).length;
+  $('lob-count').textContent=count===0?'// Aguardando conexões...':`// ${count} jogador${count!==1?'es':''} conectado${count!==1?'s':''}`;
+  $('lob-count-n').textContent=`(${count})`;
+  const list=$('lob-players'); list.innerHTML='';
+  if (count===0){list.innerHTML='<div class="empty-state">Aguardando...</div>';}
+  else{
+    Object.entries(players).forEach(([id,p])=>{
+      const me=id===pid;
+      const row=document.createElement('div');
+      row.className='prow'+(me?' me':p.isHost?' host':'');
+      row.innerHTML=`<div class="pdot ${me?'me':p.isHost?'host':''}"></div><div class="pname">${esc(p.name)}${me?'<span class="ptag2">[VOCÊ]</span>':''}${p.isHost?'<span class="ptag2 ht">[HOST]</span>':''}</div><div class="ppts">${p.score||0}</div>`;
       list.appendChild(row);
     });
   }
-  gs.isHost = !!players[pid]?.isHost;
-  const btn = $('btn-start');
-  if (gs.isHost) {
-    btn.style.display = 'flex'; btn.disabled = count < 2;
-    btn.textContent = count < 2 ? '// Aguarde mais jogadores...' : `▶ Iniciar (${count} jogadores)`;
-  } else { btn.style.display = 'none'; }
+  gs.isHost=!!players[pid]?.isHost;
+  const btn=$('btn-start');
+  if (gs.isHost){
+    btn.style.display='flex'; btn.disabled=count<2;
+    btn.textContent=count<2?'// Aguarde mais jogadores...':`▶ Iniciar (${count} jogadores)`;
+  } else {btn.style.display='none';}
 }
 
-window.startGame = async () => {
-  await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter:rndL(), round:1, timer:60, stopped:false, stoppedBy:null, resultsCalc:false });
-  await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { sys:true, text:'// PARTIDA INICIADA! BOA SORTE A TODOS.', ts:Date.now() });
+window.startGame = async ()=>{
+  await update(ref(db,`rooms/${gs.roomId}/gameState`),{status:'playing',letter:rndL(),round:1,timer:60,stopped:false,stoppedBy:null,resultsCalc:false});
+  await set(push(ref(db,`rooms/${gs.roomId}/chat`)),{sys:true,text:'// PARTIDA INICIADA! BOA SORTE.',ts:Date.now()});
 };
 
-// ── JOGO ──────────────────────────────────────────────────────
-function renderGame(data) {
-  const gst = data.gameState;
-  $('g-round').textContent = gst.round;
-  const t = $('g-timer');
-  t.textContent = gst.timer;
-  t.className = 'hud-timer' + (gst.timer <= 10 ? ' danger' : gst.timer <= 25 ? ' warn' : '');
+// jogo
+function renderGame(data){
+  const gst=data.gameState;
+  $('g-round').textContent=gst.round;
+  const t=$('g-timer'); t.textContent=gst.timer;
+  t.className='hud-timer'+(gst.timer<=10?' danger':gst.timer<=25?' warn':'');
 
-  if (gst.round !== gs.round) {
-    gs.round = gst.round; gs.answers = {}; gs.saved = false; gs.calcPending = false;
-    const lc = $('g-letter'); lc.textContent = gst.letter;
-    lc.style.animation = 'none'; requestAnimationFrame(() => { lc.style.animation = ''; });
-    const wrap = $('g-cats'); wrap.innerHTML = '';
-    CATS.forEach(cat => {
-      const div = document.createElement('div');
-      div.className = 'cat-item';
-      div.innerHTML = `<div class="cat-label">◈ ${cat.label}</div><input class="cat-input" type="text" id="ci-${cat.id}" autocomplete="off" autocorrect="off" spellcheck="false" inputmode="text">`;
+  if (gst.round!==gs.round){
+    gs.round=gst.round; gs.answers={}; gs.saved=false;
+    const lc=$('g-letter'); lc.textContent=gst.letter;
+    lc.style.animation='none'; requestAnimationFrame(()=>{lc.style.animation='';});
+    const wrap=$('g-cats'); wrap.innerHTML='';
+    CATS.forEach(cat=>{
+      const div=document.createElement('div');
+      div.innerHTML=`<div class="cat-label">◈ ${cat.label}</div><input class="cat-input" type="text" id="ci-${cat.id}" autocomplete="off" autocorrect="off" spellcheck="false" inputmode="text">`;
       wrap.appendChild(div);
-      document.getElementById(`ci-${cat.id}`).addEventListener('input', e => { gs.answers[cat.id] = e.target.value; });
+      document.getElementById(`ci-${cat.id}`).addEventListener('input',e=>{gs.answers[cat.id]=e.target.value;});
     });
   }
 
-  const alertEl = $('g-alert');
-  if (gst.stopped && gst.stoppedBy) {
-    const who = data.players?.[gst.stoppedBy]?.name || 'Alguém';
-    alertEl.textContent = `// ${who.toUpperCase()} APERTOU STOP — SALVANDO...`;
-    alertEl.style.display = 'block';
-  } else { alertEl.style.display = 'none'; }
+  const alertEl=$('g-alert');
+  if (gst.stopped&&gst.stoppedBy){
+    alertEl.textContent=`// ${(data.players?.[gst.stoppedBy]?.name||'Alguém').toUpperCase()} APERTOU STOP — SALVANDO...`;
+    alertEl.style.display='block';
+  } else {alertEl.style.display='none';}
 
-  CATS.forEach(c => { const inp = $(`ci-${c.id}`); if (inp) inp.disabled = gst.stopped; });
-  $('stop-btn').disabled = gst.stopped;
+  CATS.forEach(c=>{const inp=$(`ci-${c.id}`);if(inp)inp.disabled=gst.stopped;});
+  $('stop-btn').disabled=gst.stopped;
 
-  if (gst.stopped && !gs.saved) {
-    gs.saved = true;
-    set(ref(db, `rooms/${gs.roomId}/answers/${pid}/${gst.round}`), gs.answers || {}).catch(() => {});
+  if (gst.stopped&&!gs.saved){
+    gs.saved=true;
+    set(ref(db,`rooms/${gs.roomId}/answers/${pid}/${gst.round}`),gs.answers||{}).catch(()=>{});
   }
 
-  gs.isHost = !!data.players?.[pid]?.isHost;
+  gs.isHost=!!data.players?.[pid]?.isHost;
 
-  // Timer — roda só no host para evitar drift entre clientes
-  if (gs.isHost && !gst.stopped && !gs.timerInterval) {
-    gs.timerInterval = setInterval(async () => {
-      const s = await get(ref(db, `rooms/${gs.roomId}/gameState`));
-      const g = s.val();
-      if (!g || g.status !== 'playing' || g.stopped) { clearInterval(gs.timerInterval); gs.timerInterval = null; return; }
-      if (g.timer > 1) {
-        await update(ref(db, `rooms/${gs.roomId}/gameState`), { timer: g.timer - 1 });
+  if (gs.isHost&&!gst.stopped&&!gs.timerInterval){
+    gs.timerInterval=setInterval(async()=>{
+      const s=await get(ref(db,`rooms/${gs.roomId}/gameState`));
+      const g=s.val();
+      if (!g||g.status!=='playing'||g.stopped){clearInterval(gs.timerInterval);gs.timerInterval=null;return;}
+      if (g.timer>1){
+        await update(ref(db,`rooms/${gs.roomId}/gameState`),{timer:g.timer-1});
       } else {
-        clearInterval(gs.timerInterval); gs.timerInterval = null;
-        await update(ref(db, `rooms/${gs.roomId}/gameState`), { stopped: true, stoppedBy: null, timer: 0 });
-        setTimeout(() => calcResults(g.round), 2500);
+        clearInterval(gs.timerInterval); gs.timerInterval=null;
+        await update(ref(db,`rooms/${gs.roomId}/gameState`),{stopped:true,stoppedBy:null,timer:0});
+        setTimeout(()=>calcResults(g.round),2500);
       }
-    }, 1000);
+    },1000);
   }
-
-  if (gst.stopped && gs.timerInterval) { clearInterval(gs.timerInterval); gs.timerInterval = null; }
-  // calcResults é chamada apenas pelo host via pressStop ou timer — o flag resultsCalc no Firebase garante execução única
+  if (gst.stopped&&gs.timerInterval){clearInterval(gs.timerInterval);gs.timerInterval=null;}
 }
 
-window.pressStop = async () => {
-  const s = await get(ref(db, `rooms/${gs.roomId}/gameState`));
+window.pressStop = async ()=>{
+  const s=await get(ref(db,`rooms/${gs.roomId}/gameState`));
   if (s.val()?.stopped) return;
-  const round = s.val()?.round || 1;
-  gs.saved = true;
-  await set(ref(db, `rooms/${gs.roomId}/answers/${pid}/${round}`), gs.answers || {});
-  await update(ref(db, `rooms/${gs.roomId}/gameState`), { stopped: true, stoppedBy: pid, timer: 0 });
-  if (gs.timerInterval) { clearInterval(gs.timerInterval); gs.timerInterval = null; }
-  await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { sys:true, text:`// ${gs.name.toUpperCase()} APERTOU STOP!`, ts:Date.now() });
-  if (gs.isHost) setTimeout(() => calcResults(round), 2500);
+  const round=s.val()?.round||1;
+  gs.saved=true;
+  await set(ref(db,`rooms/${gs.roomId}/answers/${pid}/${round}`),gs.answers||{});
+  await update(ref(db,`rooms/${gs.roomId}/gameState`),{stopped:true,stoppedBy:pid,timer:0});
+  if (gs.timerInterval){clearInterval(gs.timerInterval);gs.timerInterval=null;}
+  await set(push(ref(db,`rooms/${gs.roomId}/chat`)),{sys:true,text:`// ${gs.name.toUpperCase()} APERTOU STOP!`,ts:Date.now()});
+  if (gs.isHost) setTimeout(()=>calcResults(round),2500);
 };
 
-async function calcResults(round) {
-  // Usa transação via flag no Firebase para garantir execução única
-  // mesmo que calcResults seja chamado múltiplas vezes (ex: pressStop + renderGame)
-  const flagRef = ref(db, `rooms/${gs.roomId}/gameState/resultsCalc`);
-  const flagSnap = await get(flagRef);
-  if (flagSnap.val() === true) return; // já calculado
-  await set(flagRef, true); // reserva o cálculo atomicamente
-
-  const snap = await get(ref(db, `rooms/${gs.roomId}`));
-  const data = snap.val();
-  const players = data.players || {}, answers = data.answers || {};
-  const letter = data.gameState.letter, pts = {};
-  CATS.forEach(cat => {
-    const valid = {};
-    Object.keys(players).forEach(id => {
-      const ans = (answers[id]?.[round]?.[cat.id] || '').trim();
-      if (ans && ans.charAt(0).toUpperCase() === letter.toUpperCase()) valid[id] = ans.toLowerCase();
+async function calcResults(round){
+  const flagRef=ref(db,`rooms/${gs.roomId}/gameState/resultsCalc`);
+  const flagSnap=await get(flagRef);
+  if (flagSnap.val()===true) return;
+  await set(flagRef,true);
+  const snap=await get(ref(db,`rooms/${gs.roomId}`));
+  const data=snap.val();
+  const players=data.players||{}, answers=data.answers||{};
+  const letter=data.gameState.letter, pts={};
+  CATS.forEach(cat=>{
+    const valid={};
+    Object.keys(players).forEach(id=>{
+      const ans=(answers[id]?.[round]?.[cat.id]||'').trim();
+      if (ans&&ans.charAt(0).toUpperCase()===letter.toUpperCase()) valid[id]=ans.toLowerCase();
     });
-    Object.keys(players).forEach(id => {
-      if (!pts[id]) pts[id] = 0;
-      if (valid[id] === undefined) return;
-      const rep = Object.keys(valid).some(o => o !== id && valid[o] === valid[id]);
-      pts[id] += rep ? 5 : 10;
+    Object.keys(players).forEach(id=>{
+      if (!pts[id]) pts[id]=0;
+      if (valid[id]===undefined) return;
+      pts[id]+=Object.keys(valid).some(o=>o!==id&&valid[o]===valid[id])?5:10;
     });
   });
-  const upd = {};
-  Object.keys(players).forEach(id => { upd[`players/${id}/score`] = (players[id].score || 0) + (pts[id] || 0); });
-  upd['gameState/status'] = 'results';
-  await update(ref(db, `rooms/${gs.roomId}`), upd);
+  const upd={};
+  Object.keys(players).forEach(id=>{upd[`players/${id}/score`]=(players[id].score||0)+(pts[id]||0);});
+  upd['gameState/status']='results';
+  await update(ref(db,`rooms/${gs.roomId}`),upd);
 }
 
-// ── RESULTADOS ────────────────────────────────────────────────
-function renderResults(data) {
-  const gst = data.gameState, players = data.players || {};
-  const answers = data.answers || {}, letter = gst.letter, round = gst.round;
-  $('r-round').textContent = round;
-  $('r-letter').textContent = letter;
-  const board = $('r-board'); board.innerHTML = '';
-  Object.entries(players).sort((a,b) => (b[1].score||0)-(a[1].score||0)).forEach(([id, p]) => {
-    const chip = document.createElement('div');
-    chip.className = 'schip ' + (id === pid ? 'sc-me' : 'sc-other');
-    chip.innerHTML = `${id===pid?'[VOCÊ] ':''}${esc(p.name)}: ${p.score||0} PTS`;
+// resultados
+function renderResults(data){
+  const gst=data.gameState, players=data.players||{}, answers=data.answers||{};
+  const letter=gst.letter, round=gst.round;
+  $('r-round').textContent=round; $('r-letter').textContent=letter;
+  const board=$('r-board'); board.innerHTML='';
+  Object.entries(players).sort((a,b)=>(b[1].score||0)-(a[1].score||0)).forEach(([id,p])=>{
+    const chip=document.createElement('div');
+    chip.className='schip '+(id===pid?'sc-me':'sc-other');
+    chip.innerHTML=`${id===pid?'[VOCÊ] ':''}${esc(p.name)}: ${p.score||0} PTS`;
     board.appendChild(chip);
   });
-  const content = $('r-content'); content.innerHTML = '';
-  CATS.forEach(cat => {
-    const valid = {};
-    Object.keys(players).forEach(id => {
-      const ans = (answers[id]?.[round]?.[cat.id] || '').trim();
-      if (ans && ans.charAt(0).toUpperCase() === letter.toUpperCase()) valid[id] = ans.toLowerCase();
+  const content=$('r-content'); content.innerHTML='';
+  CATS.forEach(cat=>{
+    const valid={};
+    Object.keys(players).forEach(id=>{
+      const ans=(answers[id]?.[round]?.[cat.id]||'').trim();
+      if (ans&&ans.charAt(0).toUpperCase()===letter.toUpperCase()) valid[id]=ans.toLowerCase();
     });
-    const sec = document.createElement('div'); sec.className = 'cat-result';
-    sec.innerHTML = `<div class="cr-title">${cat.label}</div>`;
-    const rows = document.createElement('div'); rows.className = 'ans-rows';
-    Object.entries(players).forEach(([id, player]) => {
-      const raw = (answers[id]?.[round]?.[cat.id] || '').trim();
-      let rowCls = 'p0', ptsCls = 'r', ptsLabel = '✗ 0';
-      if (valid[id] !== undefined) {
-        const rep = Object.keys(valid).some(o => o !== id && valid[o] === valid[id]);
-        rowCls = rep ? 'p5' : 'p10'; ptsCls = rep ? 'y' : 'g'; ptsLabel = rep ? '△ +5' : '✓ +10';
+    const sec=document.createElement('div'); sec.className='cat-result';
+    sec.innerHTML=`<div class="cr-title">${cat.label}</div>`;
+    const rows=document.createElement('div'); rows.className='ans-rows';
+    Object.entries(players).forEach(([id,player])=>{
+      const raw=(answers[id]?.[round]?.[cat.id]||'').trim();
+      let rowCls='p0',ptsCls='r',ptsLabel='✗ 0';
+      if (valid[id]!==undefined){
+        const rep=Object.keys(valid).some(o=>o!==id&&valid[o]===valid[id]);
+        rowCls=rep?'p5':'p10'; ptsCls=rep?'y':'g'; ptsLabel=rep?'△ +5':'✓ +10';
       }
-      const row = document.createElement('div'); row.className = `ans-row ${rowCls}`;
-      row.innerHTML = `<div class="an-player ${id===pid?'me':'them'}">${esc(player.name)}${id===pid?' [você]':''}</div><div class="an-word${!raw?' empty':''}">${raw?esc(raw):'vazio'}</div><div class="an-pts ${ptsCls}">${ptsLabel}</div>`;
+      const row=document.createElement('div'); row.className=`ans-row ${rowCls}`;
+      row.innerHTML=`<div class="an-player ${id===pid?'me':'them'}">${esc(player.name)}${id===pid?' [você]':''}</div><div class="an-word${!raw?' empty':''}">${raw?esc(raw):'vazio'}</div><div class="an-pts ${ptsCls}">${ptsLabel}</div>`;
       rows.appendChild(row);
     });
     sec.appendChild(rows); content.appendChild(sec);
   });
-  gs.isHost = !!players[pid]?.isHost;
-  const nb = $('btn-next'), wm = $('r-wait');
-  if (gs.isHost) {
-    nb.style.display = 'flex'; wm.style.display = 'none';
-    nb.textContent = round >= 5 ? '▶ Ver Ranking Final' : `▶ Próxima Rodada (${round+1}/5)`;
-  } else { nb.style.display = 'none'; wm.style.display = 'block'; }
+  gs.isHost=!!players[pid]?.isHost;
+  const nb=$('btn-next'), wm=$('r-wait');
+  if (gs.isHost){
+    nb.style.display='flex'; wm.style.display='none';
+    nb.textContent=round>=5?'▶ Ver Ranking Final':`▶ Próxima Rodada (${round+1}/5)`;
+  } else {nb.style.display='none'; wm.style.display='block';}
 }
 
-window.nextRound = async () => {
-  const s = await get(ref(db, `rooms/${gs.roomId}/gameState`));
-  const g = s.val(); gs.round = -1;
-  if (g.round >= 5) {
-    await update(ref(db, `rooms/${gs.roomId}/gameState`), { status: 'final' });
+window.nextRound = async ()=>{
+  const s=await get(ref(db,`rooms/${gs.roomId}/gameState`));
+  const g=s.val(); gs.round=-1;
+  if (g.round>=5){
+    await update(ref(db,`rooms/${gs.roomId}/gameState`),{status:'final'});
   } else {
-    const letter = rndL();
-    await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { sys:true, text:`// RODADA ${g.round+1} — LETRA: ${letter}`, ts:Date.now() });
-    await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter, round:g.round+1, timer:60, stopped:false, stoppedBy:null, resultsCalc:false });
+    const letter=rndL();
+    await set(push(ref(db,`rooms/${gs.roomId}/chat`)),{sys:true,text:`// RODADA ${g.round+1} — LETRA: ${letter}`,ts:Date.now()});
+    await update(ref(db,`rooms/${gs.roomId}/gameState`),{status:'playing',letter,round:g.round+1,timer:60,stopped:false,stoppedBy:null,resultsCalc:false});
   }
 };
 
-// ── FINAL ─────────────────────────────────────────────────────
-function renderFinal(data) {
-  const players = data.players || {};
-  const sorted = Object.entries(players).map(([id,p]) => ({id,...p})).sort((a,b) => (b.score||0)-(a.score||0));
-  const winner = sorted[0];
-  $('f-winner').textContent = winner?.id === pid ? '// PARABÉNS — VOCÊ VENCEU!' : `// VENCEDOR: ${winner?.name||'?'}`;
-  const list = $('f-ranking'); list.innerHTML = '';
-  const cls = {0:'rk1',1:'rk2',2:'rk3'}; const medals = ['🥇','🥈','🥉','◈','◈','◈'];
-  sorted.forEach((p, i) => {
-    const div = document.createElement('div'); div.className = `rank-row ${cls[i]||'rkn'}`;
-    div.innerHTML = `<div class="rank-medal">${medals[i]}</div><div class="rank-name">${esc(p.name)}${p.id===pid?'<span class="rank-you">[VOCÊ]</span>':''}</div><div class="rank-pts">${p.score||0} PTS</div>`;
+// final
+function renderFinal(data){
+  const players=data.players||{};
+  const sorted=Object.entries(players).map(([id,p])=>({id,...p})).sort((a,b)=>(b.score||0)-(a.score||0));
+  const winner=sorted[0];
+  $('f-winner').textContent=winner?.id===pid?'// PARABÉNS — VOCÊ VENCEU!':`// VENCEDOR: ${winner?.name||'?'}`;
+  const list=$('f-ranking'); list.innerHTML='';
+  const cls={0:'rk1',1:'rk2',2:'rk3'}; const medals=['🥇','🥈','🥉','◈','◈','◈'];
+  sorted.forEach((p,i)=>{
+    const div=document.createElement('div'); div.className=`rank-row ${cls[i]||'rkn'}`;
+    div.innerHTML=`<div class="rank-medal">${medals[i]}</div><div class="rank-name">${esc(p.name)}${p.id===pid?'<span class="rank-you">[VOCÊ]</span>':''}</div><div class="rank-pts">${p.score||0} PTS</div>`;
     list.appendChild(div);
   });
 }
 
-// ── MISC ──────────────────────────────────────────────────────
-window.copyCode = () => { navigator.clipboard?.writeText(gs.roomCode||'').catch(()=>{}); toast('// CÓDIGO COPIADO: '+gs.roomCode); };
+// misc
+window.copyCode = ()=>{navigator.clipboard?.writeText(gs.roomCode||'').catch(()=>{});toast('// CÓDIGO COPIADO: '+gs.roomCode);};
 
-window.leaveRoom = async () => {
-  if (gs.timerInterval) { clearInterval(gs.timerInterval); gs.timerInterval = null; }
-  gs.unsub?.(); gs.unsub = null;
-  gs.chatUnsub?.(); gs.chatUnsub = null;
-  await leaveVoice().catch(() => {});
-  if (gs.roomId) await remove(ref(db, `rooms/${gs.roomId}/players/${pid}`)).catch(() => {});
-  gs.roomId = null; gs.roomCode = null;
-  clearSession();
-  gs.round = -1;
+window.leaveRoom = async ()=>{
+  if (gs.timerInterval){clearInterval(gs.timerInterval);gs.timerInterval=null;}
+  gs.unsub?.(); gs.unsub=null; gs.chatUnsub?.(); gs.chatUnsub=null;
+  await leaveVoice().catch(()=>{});
+  if (gs.roomId) await remove(ref(db,`rooms/${gs.roomId}/players/${pid}`)).catch(()=>{});
+  gs.roomId=null; gs.roomCode=null; clearSession(); gs.round=-1;
   showScreen('home');
 };
 
-window.playAgain = async () => {
-  const snap = await get(ref(db, `rooms/${gs.roomId}`));
-  const data = snap.val(); const upd = {};
-  Object.keys(data.players||{}).forEach(id => { upd[`players/${id}/score`] = 0; });
-  upd['gameState'] = { status:'waiting', letter:null, round:0, timer:60, stopped:false, stoppedBy:null };
-  upd['answers'] = { _:0 }; upd['chat'] = { _:0 };
-  await update(ref(db, `rooms/${gs.roomId}`), upd);
-  gs.round = -1; showScreen('lobby');
+window.playAgain = async ()=>{
+  const snap=await get(ref(db,`rooms/${gs.roomId}`));
+  const data=snap.val(); const upd={};
+  Object.keys(data.players||{}).forEach(id=>{upd[`players/${id}/score`]=0;});
+  upd['gameState']={status:'waiting',letter:null,round:0,timer:60,stopped:false,stoppedBy:null};
+  upd['answers']={_:0}; upd['chat']={_:0};
+  await update(ref(db,`rooms/${gs.roomId}`),upd);
+  gs.round=-1; showScreen('lobby');
 };
 
-window.goHome = () => leaveRoom();
+window.goHome = ()=>leaveRoom();
 
-// ── INIT ──────────────────────────────────────────────────────
-if (gs.name) $('inp-name').value = gs.name;
-
-// Tenta reconectar sessão salva ao abrir a página
-tryReconnect(false).then(ok => {
-  if (!ok) showScreen('home');
-});
-
-// Fecha drawer ao tocar fora
-document.addEventListener('touchstart', e => {
-  const drawer = $('chat-drawer');
-  const fab = $('chat-fab');
-  if (chatDrawerOpen && drawer && !drawer.contains(e.target) && !fab?.contains(e.target)) {
-    closeChatDrawer();
-  }
-}, { passive: true });
+// init
+if (gs.name) $('inp-name').value=gs.name;
+tryReconnect(false).then(ok=>{if(!ok)showScreen('home');});
 </script>
 </body>
 </html>
