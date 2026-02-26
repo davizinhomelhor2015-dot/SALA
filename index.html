@@ -773,7 +773,7 @@ function renderLobby(data) {
 }
 
 window.startGame = async () => {
-  await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter:rndL(), round:1, timer:60, stopped:false, stoppedBy:null });
+  await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter:rndL(), round:1, timer:60, stopped:false, stoppedBy:null, resultsCalc:false });
   await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { sys:true, text:'// PARTIDA INICIADA! BOA SORTE A TODOS.', ts:Date.now() });
 };
 
@@ -833,10 +833,7 @@ function renderGame(data) {
   }
 
   if (gst.stopped && gs.timerInterval) { clearInterval(gs.timerInterval); gs.timerInterval = null; }
-  if (gst.stopped && gs.isHost && !gs.calcPending) {
-    gs.calcPending = true;
-    setTimeout(() => { gs.calcPending = false; calcResults(gst.round); }, 2500);
-  }
+  // calcResults é chamada apenas pelo host via pressStop ou timer — o flag resultsCalc no Firebase garante execução única
 }
 
 window.pressStop = async () => {
@@ -852,6 +849,13 @@ window.pressStop = async () => {
 };
 
 async function calcResults(round) {
+  // Usa transação via flag no Firebase para garantir execução única
+  // mesmo que calcResults seja chamado múltiplas vezes (ex: pressStop + renderGame)
+  const flagRef = ref(db, `rooms/${gs.roomId}/gameState/resultsCalc`);
+  const flagSnap = await get(flagRef);
+  if (flagSnap.val() === true) return; // já calculado
+  await set(flagRef, true); // reserva o cálculo atomicamente
+
   const snap = await get(ref(db, `rooms/${gs.roomId}`));
   const data = snap.val();
   const players = data.players || {}, answers = data.answers || {};
@@ -927,7 +931,7 @@ window.nextRound = async () => {
   } else {
     const letter = rndL();
     await set(push(ref(db, `rooms/${gs.roomId}/chat`)), { sys:true, text:`// RODADA ${g.round+1} — LETRA: ${letter}`, ts:Date.now() });
-    await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter, round:g.round+1, timer:60, stopped:false, stoppedBy:null });
+    await update(ref(db, `rooms/${gs.roomId}/gameState`), { status:'playing', letter, round:g.round+1, timer:60, stopped:false, stoppedBy:null, resultsCalc:false });
   }
 };
 
